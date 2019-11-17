@@ -10,12 +10,12 @@ my_api_key = "YOUR API KEY"
 my_cse_id = "YOUR CSE ID"
 
 #Function to search for file and update search history, if not found, create
-def add_history(cmd):
-    if os.path.exists('history.txt'):
-        file = open('history.txt','a+')
+def add_history(cmd, author):
+    if os.path.exists(f'history{author}.txt'):
+        file = open(f'history{author}.txt','a+')
         file.write(f'{cmd}\n')
     else:
-        file = open('history.txt','a+')
+        file = open(f'history{author}.txt','a+')
         file.write(f'{cmd}\n')
 
 #Function to trigger Custom Google Search and return raw data
@@ -54,7 +54,7 @@ async def on_message(message):
         for result in results:
             link = result.get('link')
             await message.channel.send(f'{link}\n')
-        add_history(in_cmd)
+        add_history(in_cmd, message.author)
 
 
     #Defining recent functionality 
