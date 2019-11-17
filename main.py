@@ -63,7 +63,7 @@ async def on_message(message):
         if search_term.lstrip() == '':
             await message.channel.send('Please mention what you are looking for like \n!recent google')
         if search_term.lstrip() != '':
-            with open("history.txt","r") as search_file:
+            with open(f"history{message.author}.txt","r") as search_file:
                 for search_line in search_file:
                     if search_term in search_line:
                         await message.channel.send(f'{search_line[7:]} \n')
